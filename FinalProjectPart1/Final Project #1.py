@@ -15,6 +15,11 @@ def sort_by_price(item):
     return price
 
 
+def sort_by_ID(item):
+    item_ID = item[0]
+    return item_ID
+
+
 class Inventory:
     def __init__(self, manufacturers_file, prices_file, services_dates_file, full_inventory_file, laptop_inventory_file,
                  past_service_date_file, damaged_file):
@@ -115,7 +120,7 @@ class Inventory:
 
         # sort Laptop Inventory
         laptop_inventory_list = [(key, val) for key, val in self.laptop_inventory.items()]
-        laptop_inventory_sorted = sorted(laptop_inventory_list, key=sort_by_manufacturer_and_date)
+        laptop_inventory_sorted = sorted(laptop_inventory_list, key=sort_by_ID)
 
         # sort Past service date inventory
         past_service_date_inventory_list = [(key, val) for key, val in self.past_service_date_inventory.items()]
@@ -130,7 +135,6 @@ class Inventory:
                 open(self.laptop_inventory_file, 'w', newline='') as laptop_file, \
                 open(self.past_service_date_file, 'w', newline='') as past_service_file, \
                 open(self.damaged_file, 'w', newline='') as damaged_inventory_file:
-
             # Create a csv.writer object for each output file
             full_writer = csv.writer(full_file)
             laptop_writer = csv.writer(laptop_file)
